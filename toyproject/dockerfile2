@@ -1,12 +1,12 @@
 FROM node:alpine
 USER root
+## && apt-get install nginx -y
+COPY main.js /bin/main.js
 COPY execute.js /bin/execute.js
-COPY job.js /bin/job.js
 COPY package.json /bin/package.json
 RUN apk search npm
 RUN apk add --update nodejs npm
 RUN cd /bin && npm i
 RUN node -v
-CMD ["node", "/bin/job.js"]
+CMD ["node", "/bin/main.js"]
 EXPOSE 80
-

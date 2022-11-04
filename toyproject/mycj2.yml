@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: time-limited-cronjob
+spec:
+  jobTemplate:
+    metadata:
+      name: my-time-limited-job
+    spec:
+      activeDeadlineSeconds: 150
+      template:
+        spec:
+          containers:
+            - args:
+              image: black3279/executejs:v1
+              name: time-limited-job
+          restartPolicy: Never
+  schedule: '* * * * *'
